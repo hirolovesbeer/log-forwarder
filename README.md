@@ -5,7 +5,11 @@ This software is prototype of syslog/xflow/snmptrap forwarder.
 - Received syslog/xflow/snmptrap using UDP Socket
 - Pure python implement
 - Using Hardware NIC acceleration
+  - RSS(Recieve Side Scaling)
 - Core-scale architecture
+  - multiprocessing
+  - SO_REUSEPORT
+  - irqbalance
 
 # Environment
 - CentOS 7.3
