@@ -1,3 +1,19 @@
+syslog-port: 512
+netflow-port: 9996
+slow-port: 6343
+ipfix-port: 4739
+trap-port: 162
+
+syslog-core: 2
+netflow-core: 2
+sflow-core: 2
+ipfix-core: 2
+trap-core: 1
+
 syslog:
   - 10.206.116.22
   - 192.168.11.13
+netflow:
+sflow:
+ipfix:
+trap:

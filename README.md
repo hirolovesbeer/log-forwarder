@@ -13,7 +13,13 @@ This software is prototype of syslog/xflow/snmptrap forwarder.
 
 # Environment
 - CentOS 7.3
-- Python 3.5.1
+- Python 3.5.1(used anaconda packages)
+
+# Dependency softwares
+- PyYaml
+  - $ conda install yaml
+- supervisord(daemonize)
+  - $ sudo yum install supervisor
 
 # Benchmark
 - TBD
