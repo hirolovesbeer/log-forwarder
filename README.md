@@ -1,4 +1,4 @@
-# Log Forwarder(as known as Sekiwake)
+# Log Forwarder(a.k.a Sekiwake)
 This software is prototype of syslog/xflow/snmptrap forwarder.
 
 # Concept

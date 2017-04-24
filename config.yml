@@ -10,9 +10,17 @@ sflow-core: 2
 ipfix-core: 2
 trap-core: 1
 
-syslog:
+syslog-all:
   - 10.206.116.22
   - 192.168.11.13
+syslog-filter:
+  - 10.206.116.22
+  - 192.168.11.13
+filter-list:
+  - 192.168.0.1
+  - 10.0.0.1
+  - 172.168.0.1
+
 netflow:
 sflow:
 ipfix:
