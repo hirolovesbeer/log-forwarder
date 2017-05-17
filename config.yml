@@ -1,4 +1,4 @@
-syslog-port: 512
+syslog-port: 514
 netflow-port: 9996
 slow-port: 6343
 ipfix-port: 4739
