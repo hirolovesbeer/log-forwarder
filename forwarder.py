@@ -26,7 +26,7 @@ def listener_work(num, dst_hosts, dst_filter_hosts, filter_list, port):
 
             for dst in dst_filter_hosts:
                 # match filter list
-                if len([x for x in filter_list if x == addr[0]]) == 1:
+                if addr[0] in filter_list:
                     continue
                 else:
                     s.sendto(data, (dst, port))
