@@ -1,7 +1,8 @@
 syslog-port: 514
-netflow-port: 9996
-slow-port: 6343
-ipfix-port: 4739
+#netflow-port: 9996
+#slow-port: 6343
+#ipfix-port: 4739
+xflow-port: 2055,2056,4739,9995,9996,6343
 trap-port: 162
 
 syslog-core: 2
@@ -10,16 +11,21 @@ sflow-core: 2
 ipfix-core: 2
 trap-core: 1
 
-syslog-all:
-  - 10.206.116.22
-  - 192.168.11.13
-syslog-filter:
-  - 10.206.116.22
-  - 192.168.11.13
-filter-list:
-  - 192.168.0.1
-  - 10.0.0.1
-  - 172.168.0.1
+syslog:
+  dst-all:
+    - 172.16.18.11
+    - 172.16.18.40
+    - 172.16.18.43
+    - 172.16.18.61
+    - 172.16.18.140
+  dst-security-only:
+    - 172.16.18.74
+  dst-mgmt-only:
+    - 172.16.18.10
+    - 172.16.18.60
+    - 172.16.18.70
+  src-security:
+    - 172.16.12.X
 
 netflow:
 sflow:
