@@ -3,10 +3,17 @@ port:
   xflow: 2055,2056,4739,9995,9996,6343
   trap: 162
 
-core:
+process:
   syslog: 2
   xflow: 1 # each process
   trap: 1
+
+# 物理コア割り当て
+# 全部使いたければ0-7(HTを含んだコア数)とかにしておく
+core:
+  syslog: 0,1
+  xflow: 2,3,4,5,6,7
+  trap: 0
 
 syslog:
   dst-all:

@@ -8,8 +8,8 @@ from multiprocessing import Process
 import yaml
 
 PORT = 514
-#NR_LISTENERS = os.cpu_count()
 NR_LISTENERS = 1
+CORES = 0
 
 SO_REUSEPORT = 15
 
@@ -62,13 +62,16 @@ def server(args):
     # 指定がなければsyslog転送が起動
     if args.f:
         PORT = config['port']['xflow'] 
-        NR_LISTENERS = config['core']['xflow']
+        NR_LISTENERS = config['process']['xflow']
+        CORES = config['core']['xflow']
     elif args.t:
         PORT = config['port']['trap'] 
-        NR_LISTENERS = config['core']['trap']
+        NR_LISTENERS = config['process']['trap']
+        CORES = config['core']['trap']
     else:
         PORT = config['port']['syslog'] 
-        NR_LISTENERS = config['core']['syslog']
+        NR_LISTENERS = config['process']['syslog']
+        CORES = config['core']['syslog']
 
     processes = []
     if args.f:
@@ -79,14 +82,16 @@ def server(args):
             for i in range(NR_LISTENERS):
                 p = Process(target=listener_work, args=(i, config, int(port)))
                 p.start()
-                os.system("taskset -p -c %d %d" % ((i % NR_LISTENERS), p.pid))
+                #os.system("taskset -p -c %d %d" % ((i % NR_LISTENERS), p.pid))
+                os.system("taskset -p -c %s %d" % (CORES, p.pid))
                 processes.append(p)
 
     else:
         for i in range(NR_LISTENERS):
             p = Process(target=listener_work, args=(i, config, PORT))
             p.start()
-            os.system("taskset -p -c %d %d" % ((i % NR_LISTENERS), p.pid))
+            # os.system("taskset -p -c %d %d" % ((i % NR_LISTENERS), p.pid))
+            os.system("taskset -p -c %s %d" % (CORES, p.pid))
             processes.append(p)
 
     for p in processes:
