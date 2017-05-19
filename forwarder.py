@@ -27,7 +27,7 @@ def listener_work(num, config, port):
             data, addr = s.recvfrom(BUFSIZE)
 
             # syslog
-            if port == '514':
+            if port == config['port']['syslog']:
                 # security only
                 if addr[0] in config['syslog']['src-security']:
                     # src securityからのsyslog
@@ -44,7 +44,7 @@ def listener_work(num, config, port):
                 for dst in config['syslog']['dst-all']:
                     s.sendto(data, (dst, port))
             # trap
-            elif port == '162':
+            elif port == config['port']['trap']:
                 for dst in config['trap']['dst-all']:
                     s.sendto(data, (dst, port))
             # xflow
