@@ -56,6 +56,14 @@ def listener_work(num, config, port):
         print ("Crtl+C Pressed. Shutting down.")
 
 def server(args):
+    global CONFIG
+    global PORT
+    global NR_LISTENERS
+    global CORES
+
+    if args.c != False:
+        CONFIG = args.c
+
     with open(CONFIG) as f:
         config = yaml.load(f)
 
@@ -107,6 +115,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument("-c", type=str, default=False,
+                        help="config file")
     parser.add_argument("-s",
                         help="syslog", action="store_true")
     parser.add_argument("-f",

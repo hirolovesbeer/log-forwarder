@@ -1,6 +1,6 @@
 port:
   syslog: 514
-  xflow: 2055,2056,4739,9995,9996,6343
+  xflow: 2055,4739,6343
   trap: 162
 
 process:
