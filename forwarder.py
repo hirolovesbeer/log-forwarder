@@ -6,6 +6,7 @@ import sys, socket, time, os
 from multiprocessing import Process
 
 import yaml
+import ipaddress
 
 PORT = 514
 NR_LISTENERS = 1
@@ -22,6 +23,8 @@ def listener_work(num, config, port):
     s.setsockopt(socket.SOL_SOCKET, SO_REUSEPORT, 1)   # set SO_REUSEPORT
     s.bind(("", port))
 
+    src_security = ipaddress.ip_network(config['syslog']['src-security'])
+
     try:
         while True:
             data, addr = s.recvfrom(BUFSIZE)
@@ -29,7 +32,10 @@ def listener_work(num, config, port):
             # syslog
             if port == config['port']['syslog']:
                 # security only
-                if addr[0] in config['syslog']['src-security']:
+                src_ip = ipaddress.ip_network(dst)
+
+#                if addr[0] in config['syslog']['src-security']:
+                if src_ip.compare_networks(src_security) == 1:
                     # src securityからのsyslog
                     for dst in config['syslog']['dst-security-only']:
                         # security-onlyへ飛ばす
