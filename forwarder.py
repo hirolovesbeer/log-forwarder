@@ -32,7 +32,7 @@ def listener_work(num, config, port):
             # syslog
             if port == config['port']['syslog']:
                 # security only
-                src_ip = ipaddress.ip_network(dst)
+                src_ip = ipaddress.ip_network(addr[0])
 
 #                if addr[0] in config['syslog']['src-security']:
                 if src_ip.compare_networks(src_security) == 1:
